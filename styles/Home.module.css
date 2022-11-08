@@ -157,8 +157,14 @@
   align-items: center;
   
 }
+.cardLeft{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:1rem;
+}
 .fileInfo{
-  margin-left:-200px;
+  /* margin-left:-200px; */
 }
 .card h2 {
   margin: 0 0 1rem 0;

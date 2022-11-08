@@ -5,6 +5,20 @@ import styles from '../styles/Home.module.css'
 import { BiArrowBack } from 'react-icons/bi'
 
 export default function Home() {
+  const files = [
+    {"id":1,
+      "filename":"name1",
+      "size":"20 GB"
+    },
+    {"id":2,
+      "filename":"name2",
+      "size":"20 GB"
+    },
+    {"id":3,
+      "filename":"name3",
+      "size":"20 GB"
+    }
+  ]
 
   return (
     <>
@@ -31,38 +45,41 @@ export default function Home() {
             <input style={{ scale: '1.5', Accentcolor: 'green' }} type="checkbox" ></input>
           </section>
           <ul>
-            {(() => {
-              const rows = []
-              for (let i = 0; i < 56; i++) {
-                function handleSelect(e) {
-                  if (e.target.checked === true) {
-                    setisSelect(true)
-                  }
-                  else {
-                    setisSelect(false)
-                  }
-                }
-                const [isSelect, setisSelect] = useState(false);
-
-                rows.push(
-                  <label className={styles.cardContainer}>
-                    <li style={isSelect ? { backgroundColor: 'rgb(37, 82, 230)' } : {}} className={styles.card} key={i}>
-                      <div className={styles.photo}>file {i}</div>
-                      <div className={styles.fileInfo}>
-                        <div>File: file {i}</div>
-                        <div>Size: {i} Gb</div>
-                      </div>
-                      <input style={{ scale: '1.5', Accentcolor: 'green' }} onChange={handleSelect} type="checkbox" value={i}></input>
-                    </li>
-                  </label>
-                )
-              }
-              return rows;
-            })()}
+            {files.map( (f) => (
+              <Card f={f} key={f.id} />
+            ))}         
           </ul>
         </div>
 
       </main>
     </>
   )
+
+  function Card({f}) {
+    const [isSelect, setisSelect] = useState(false);
+
+    function handleSelect(e) {
+      if (e.target.checked === true) {
+        setisSelect( prev => !prev)
+      }
+      else {
+        setisSelect(prev => !prev)
+      }
+    }
+
+    return (
+      <label className={styles.cardContainer}>
+        <li style={isSelect ? { backgroundColor: 'rgb(37, 82, 230)' } : {}} className={styles.card} >
+          <div className={styles.cardLeft}>
+            <div className={styles.photo}>file {f.id}</div>
+            <div className={styles.fileInfo}>
+              <div>File: file {f.filename}</div>
+              <div>Size: {f.size} GB</div>
+            </div>
+          </div>
+          <input style={{ scale: '1.5', Accentcolor: 'green' }} onChange={handleSelect} type="checkbox" value={f.id}></input>
+        </li>
+      </label>
+    );
+  }
 }
