@@ -4,21 +4,30 @@
 
 .main {
   margin:0 auto;  
-  background-color: rgb(37, 82, 230);
+  /* background-color: rgb(37, 82, 230); */
   background-color: rgb(0, 0, 0);
   max-width: 483px;
   width: 483px;
+  min-height:137vh;
   
-  min-height: 100vh;
-   /*padding: 4rem 0; */
+  /* height: -webkit-fill-available; */
+  /*padding: 4rem 0; */
   flex: 1;
   display: flex;
   color:rgb(255, 255, 255);
+  font-size: 1.3rem;
   /* flex-direction: column; */
   /* justify-content: center; */
   /* align-items: center; */
 }
-
+@media only screen and (min-height: 690px) {
+  .main{
+    min-height:100vh;
+    font-size: 1rem;
+    /* display: none; */
+  }
+  
+}
 .title a {
   color: #0070f3;
   text-decoration: none;
@@ -60,7 +69,8 @@
   background-color: rgb(37, 82, 230);
   position: sticky;
   top:0;
-  height:82px;
+  /* height:82px; */
+  height:13vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,7 +84,7 @@
   align-items: center;
 }
 .backBtn{
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 
 }
 .trashNav_count p{
@@ -87,11 +97,12 @@
 .deleteBtn{
   background-color: transparent;
   color:white;
-  padding:.5rem;
+  padding:1rem;
   border-radius: 30px;
   border:none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  font-size: 21px;
 
 }
 .deleteBtn:hover , .deleteBtn:active{
@@ -142,7 +153,9 @@
 }
 .card:focus,
 .card:active {
-  background-color: rgb(47, 47, 214);
+  /* background-color: rgb(47, 47, 214); */
+  /* background-color: rgb(194, 17, 230); */
+  /* background-color: rgb(37, 82, 230); */
   /* color: #0070f3; */
   /* border-color: #0070f3; */
 }

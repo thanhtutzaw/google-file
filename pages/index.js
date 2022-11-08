@@ -69,12 +69,12 @@ export default function Home() {
 
     return (
       <label className={styles.cardContainer}>
-        <li style={isSelect ? { backgroundColor: 'rgb(37, 82, 230)' } : {}} className={styles.card} >
+        <li style={isSelect ? { backgroundColor: 'rgb(26 114 230)' } : {}} className={styles.card} >
           <div className={styles.cardLeft}>
             <div className={styles.photo}>file {f.id}</div>
             <div className={styles.fileInfo}>
               <div>File: file {f.filename}</div>
-              <div>Size: {f.size} GB</div>
+              <div>Size: {f.size}</div>
             </div>
           </div>
           <input style={{ scale: '1.5', Accentcolor: 'green' }} onChange={handleSelect} type="checkbox" value={f.id}></input>
