@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react';
 import styles from '../styles/Home.module.css'
-import { BiArrowBack } from 'react-icons/bi'
+// import { BiArrowBack } from 'react-icons/bi'
+import { IoMdClose } from 'react-icons/io'
 
 export default function Home() {
   const files = [
@@ -33,7 +34,8 @@ export default function Home() {
         <div className={styles.container}>
           <section className={styles.trashNav}>
             <div className={styles.trashNav_count}>
-              <BiArrowBack className={styles.backBtn} />
+              {/* <BiArrowBack className={styles.backBtn} /> */}
+              <IoMdClose className={styles.backBtn} />
               <div>
                 <p>3 selected</p>
                 <p>2 GB</p>
