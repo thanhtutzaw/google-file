@@ -46,12 +46,12 @@ export default function Home() {
     {
       "id": 1,
       "filename": "name1",
-      "size": "20 GB"
+      "size": "5 GB"
     },
     {
       "id": 2,
       "filename": "name2",
-      "size": "20 GB"
+      "size": "1 GB"
     },
     {
       "id": 3,
@@ -60,10 +60,34 @@ export default function Home() {
     }
   ];
   const [selectedId, setselectedId] = useState([]);
+  const [isChecked, setisChecked] = useState(false);
 
   useEffect(() => {
     console.log(selectedId)
+
+    if(selectedId.length >= 1){
+      setisChecked(true)
+    }else {
+      setisChecked(false)
+    }
   }, [selectedId]);
+  function allSelect() {
+    const items = []
+    setisChecked( prev => !prev)
+    // if (isChecked) {
+    for (let i  = 0; i < files.length; i++) {
+      const id = files[i].id
+      items.push(id)
+    }
+    
+      setselectedId(items)
+    // }
+
+    if(isChecked === true){
+      setselectedId([])
+    }
+    
+  }
   return (
     <>
       <Head>
@@ -75,19 +99,22 @@ export default function Home() {
       <main className={styles.main}>
 
         <div className={styles.container}>
-          <section className={styles.trashNav}>
-            {
-              selectedId.length >= 1 ?
-                <Selectbar length={selectedId.length} setselectedId={setselectedId} />
-                :
-                <Backbar />
-            }
-          </section>
+          <div style={{position:'sticky',top:'0' , zIndex:'2000'}}>
+            <section className={styles.trashNav}>
+              {
+                selectedId.length >= 1 ?
+                  <Selectbar length={selectedId.length} setselectedId={setselectedId} />
+                  :
+                  <Backbar />
+              }
+            </section>
 
 
-          <section className={styles.allSelect}>All Select
-            <input style={{ scale: '1.5', Accentcolor: 'green' }} type="checkbox" ></input>
-          </section>
+            <section className={styles.allSelect} >
+              All Select
+              <input onChange={allSelect} checked={isChecked} style={{ Accentcolor: 'green' }} type="checkbox" ></input>
+            </section>
+          </div>
           <ul>
             {files.map((f) => (
               <Card files={files} f={f} key={f.id} setselectedId={setselectedId} selectedId={selectedId} />

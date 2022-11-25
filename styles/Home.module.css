@@ -74,10 +74,13 @@ sans-serif;
   flex-wrap: wrap;
   max-width: 800px;
 }
+/* .container:has(section) section  {
+  position: sticky;
+top     :0;
+} */
 .trashNav{
   background-color: rgb(37, 82, 230);
-  position: sticky;
-  top:0;
+  
   /* height:82px; */
   /* height:13vh; */
   height: 110px;
@@ -116,15 +119,19 @@ sans-serif;
 .deleteBtn{
   background-color: transparent;
   color:white;
-  padding:1rem;
-  border-radius: 30px;
+  padding:16px;
+  border-radius: 20px;
   border:none;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  font-size: 21px;
-
+  font-size: 22px;
+  font-family: "Google Sans",
+Roboto,
+Arial,
+sans-serif;
+user-select: none;
+  /* text-transform: uppercase; */
 }
-.deleteBtn:hover , .deleteBtn:active{
+.deleteBtn:active{
   background-color: rgba(255, 251, 251, 0.116);
   
 }
@@ -134,6 +141,13 @@ sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: black;
+  /* z-index: 2000; */
+}
+.allSelect input {
+  width:27px;
+  height:27px;
+  clip-path: circle(45% at 50% 50%);
 }
 .card {
   /* margin: 1rem 0; */
