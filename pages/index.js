@@ -6,9 +6,11 @@ import { BiArrowBack } from 'react-icons/bi'
 import { IoMdClose } from 'react-icons/io'
 
 import Card from '../component/Card';
+import { setConstantValue } from 'typescript';
 
 
 function Selectbar(props) {
+  
   return (
     <>
       <div className={styles.trashNav_count}>
@@ -18,7 +20,7 @@ function Selectbar(props) {
         <IoMdClose onClick={(e)=>{props.setselectedId([])}} className={styles.backBtn} />
         <div>
           <p>{props.length} selected</p>
-          <p>2 GB</p>
+          <p>{props.total} GB</p>
         </div>
       </div>
       <button className={styles.deleteBtn}>Delete</button>
@@ -61,9 +63,33 @@ export default function Home() {
   ];
   const [selectedId, setselectedId] = useState([]);
   const [isChecked, setisChecked] = useState(false);
+  const [total, settotal] = useState('');
 
   useEffect(() => {
-    console.log(selectedId)
+    // const total = files.filter(file => file.id == selectedId)
+    
+    // console.log(selectedId)
+    const totalArray = []
+    let total
+    // for (let i = 0; i < selectedId.length; i++) {
+      // const id =selectedId.map(s => {
+      //   total = files.filter(file => file.id == s)
+      // })
+      for (let i = 0; i < selectedId.length; i++) {
+        total = files.filter(f => f.id === selectedId[i])
+        totalArray.push(total[0])
+      }
+    const t2 = totalArray.map(t => parseInt(t.size)).reduce((prev, current) => prev+current , 0)
+      
+      
+    settotal(t2)
+    // }
+    // totalArray.push(total)
+    // totalArray.push(total)
+    // total.map(t => {
+    //   console.log(t.id)
+    // })
+    // console.log(Array.isArray(total))
 
     if(selectedId.length >= 1){
       setisChecked(true)
@@ -71,6 +97,10 @@ export default function Home() {
       setisChecked(false)
     }
   }, [selectedId]);
+
+  
+  
+
   function allSelect() {
     const items = []
     setisChecked( prev => !prev)
@@ -103,17 +133,17 @@ export default function Home() {
             <section className={styles.trashNav}>
               {
                 selectedId.length >= 1 ?
-                  <Selectbar length={selectedId.length} setselectedId={setselectedId} />
+                  <Selectbar total={total} length={selectedId.length} setselectedId={setselectedId} selectedId={selectedId} />
                   :
                   <Backbar />
               }
             </section>
 
 
-            <section className={styles.allSelect} >
+            <label className={styles.allSelect} >
               All Select
               <input onChange={allSelect} checked={isChecked} style={{ Accentcolor: 'green' }} type="checkbox" ></input>
-            </section>
+            </label>
           </div>
           <ul>
             {files.map((f) => (
