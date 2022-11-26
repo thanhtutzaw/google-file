@@ -154,13 +154,15 @@ sans-serif;
   
 }
 .deleteBtn{
+  width:116px;
+  height:69px;
   background-color: transparent;
   color:white;
   padding:16px;
   border-radius: 20px;
   border:none;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 25px;
   font-family: "Google Sans",
 Roboto,
 Arial,
