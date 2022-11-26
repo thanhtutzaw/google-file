@@ -76,8 +76,14 @@ export default function Card({playOn,playOff, f, files, setselectedId, selectedI
         playOff()
     }
     return (
-        <div className={styles.cardContainer}>
-            <li style={isSelect ? { backgroundColor: 'rgb(26 114 230)' } : {}} className={styles.card} >
+        <div onClick={(e) => {
+            if (selectedId.length >= 1 && !isSelect) {
+                check()
+            } else if (isSelect) {
+                unCheck()
+            }
+        }} className={styles.cardContainer}>
+            <li  style={isSelect ? { backgroundColor: 'rgb(26 114 230)' } : {}} className={styles.card} >
                 <div style={{ border: '0 solid red' }} className={styles.cardLeft}>
                     <div className={styles.photo}>file {f.id}</div>
                     <div className={styles.fileInfo}>
@@ -94,8 +100,8 @@ export default function Card({playOn,playOff, f, files, setselectedId, selectedI
           
           }} type="checkbox" value={f.id} /> */}
                 {(isSelect && selectedId.length !== 0) ?
-                    <RiCheckboxCircleFill className={styles.checkbox} onClick={unCheck} /> :
-                    <RiCheckboxBlankCircleLine className={styles.checkbox}  onClick={check} />}
+                    <RiCheckboxCircleFill className={styles.checkbox}  /> :
+                    <RiCheckboxBlankCircleLine className={styles.checkbox} onClick={() => {if (selectedId.length === 0){check()}}} />}
             </li>
         </div>
     );
