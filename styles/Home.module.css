@@ -74,13 +74,18 @@ sans-serif;
   flex-wrap: wrap;
   max-width: 800px;
 }
+/* section {
+  position: absolute;
+  top:0;
+  width:100%;
+} */
 /* .container:has(section) section  {
   position: sticky;
 top     :0;
 } */
-.trashNav{
-  background-color: rgb(37, 82, 230);
-  
+.trashNav ,.SelectNav{
+  /* background-color: rgb(37, 82, 230); */
+  background-color: black;
   /* height:82px; */
   /* height:13vh; */
   height: 110px;
@@ -100,6 +105,38 @@ top     :0;
 Roboto,
 Arial,
 sans-serif;
+/* background-color: red; */
+}
+.fadeOut {
+  /* position: absolute;
+  top:0;
+  width:100%; */
+  opacity   : 0;
+  /* width     : 0; */
+  /* height    : 0; */
+  transition: opacity 0.2s ease-in-out;
+  /* transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s; */
+
+}
+
+.fadeIn {
+  position: absolute;
+  top:0;
+  width:100%;
+  /* display: block; */
+  opacity   : 1;
+  transition: opacity 0.5s;
+  /* width     : 100px; */
+  /* height    : 100px; */
+  /* transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s; */
+
+}
+.SelectNav{
+  background-color: rgb(37, 82, 230);
+  border:0;
+  /* opacity: 0; */
+  /* opacity: 1; */
+  transition: all .3s ease-in;
 }
 .backBtn{
   font-size: 1rem;
