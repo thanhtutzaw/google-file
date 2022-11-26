@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from '../styles/Home.module.css'
 import { RiCheckboxBlankCircleLine } from 'react-icons/ri'
 import { RiCheckboxCircleFill } from 'react-icons/ri'
-export default function Card({ f, files, setselectedId, selectedId }) {
+export default function Card({playOn,playOff, f, files, setselectedId, selectedId }) {
     const [isSelect, setisSelect] = useState(false);
 
     function handleSelect(e) {
@@ -50,16 +50,31 @@ export default function Card({ f, files, setselectedId, selectedId }) {
     useEffect(() => {
         if (selectedId.length === 0) {
             setisSelect(false)
+            // setisChecked(false)
+            // setisChecked(prev => !prev)
         }
         if (selectedId.length === files.length) {
             setisSelect(true)
+            // setisChecked(true)
+            // setisChecked(false)
             // setselectedId([todo.id])
         }
+        // setisChecked(false)
         // else if(selectedId.length){
         //   setisSelect(true) 
         // }
         // console.log(todo.id)
     }, [selectedId]);
+    function check() {
+        setisSelect(prev => !prev);
+        setselectedId([...selectedId, f.id])
+        playOn()
+    }
+    function unCheck() {
+        setisSelect(prev => !prev);
+        setselectedId(selectedId.filter(id => id !== f.id))
+        playOff()
+    }
     return (
         <div className={styles.cardContainer}>
             <li style={isSelect ? { backgroundColor: 'rgb(26 114 230)' } : {}} className={styles.card} >
@@ -79,14 +94,8 @@ export default function Card({ f, files, setselectedId, selectedId }) {
           
           }} type="checkbox" value={f.id} /> */}
                 {(isSelect && selectedId.length !== 0) ?
-                    <RiCheckboxCircleFill className={styles.checkbox} onClick={(e) => {
-                        setisSelect(prev => !prev);
-                        setselectedId(selectedId.filter(id => id !== f.id))
-                    }} /> :
-                    <RiCheckboxBlankCircleLine className={styles.checkbox} onClick={(e) => {
-                        setisSelect(prev => !prev);
-                        setselectedId([...selectedId, f.id])
-                    }} />}
+                    <RiCheckboxCircleFill className={styles.checkbox} onClick={unCheck} /> :
+                    <RiCheckboxBlankCircleLine className={styles.checkbox}  onClick={check} />}
             </li>
         </div>
     );

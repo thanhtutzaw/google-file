@@ -13,7 +13,7 @@ import boopSfx from '/public/click.mp3'
 import checkSound from '/public/enable-sound.mp3'
 import uncheckSound from '/public/disable-sound.mp3'
 function Selectbar(props) {
-  
+
   const [play] = useSound(boopSfx);
   return (
     <>
@@ -22,7 +22,7 @@ function Selectbar(props) {
         {
           /* <BiArrowBack className={styles.backBtn} /> */
         }
-        <IoMdClose onClick={(e)=>{props.setselectedId([]); props.setisChecked(false)}} className={styles.backBtn} />
+        <IoMdClose onClick={(e) => { props.setselectedId([]); props.playOff() }} className={styles.backBtn} />
         <div>
           <p>{props.length} selected</p>
           <p>{props.total} GB</p>
@@ -66,19 +66,33 @@ export default function Home() {
   const [total, settotal] = useState('');
 
   useEffect(() => {
+    //     if (isChecked) {
+    //       () => {
+    //         useSound(checkSound,
+    //           { volume: 0.11 })
+    // }
+    //     }
+    //     else {
+    //       () => {
+    //       useSound(uncheckSound,
+    //         { volume: 0.11 })
+    //       }
+    //     }
+    console.log(isChecked)
+    // setisChecked(false)
     // const total = files.filter(file => file.id == selectedId)
     // console.log(selectedId)
     const totalArray = []
     let total
     // for (let i = 0; i < selectedId.length; i++) {
-      // const id =selectedId.map(s => {
-      //   total = files.filter(file => file.id == s)
-      // })
-      for (let i = 0; i < selectedId.length; i++) {
-        total = files.filter(f => f.id === selectedId[i])
-        totalArray.push(total[0])
-      }
-    const t2 = totalArray.map(t => parseInt(t.size)).reduce((prev, current) => prev+current , 0)
+    // const id =selectedId.map(s => {
+    //   total = files.filter(file => file.id == s)
+    // })
+    for (let i = 0; i < selectedId.length; i++) {
+      total = files.filter(f => f.id === selectedId[i])
+      totalArray.push(total[0])
+    }
+    const t2 = totalArray.map(t => parseInt(t.size)).reduce((prev, current) => prev + current, 0)
     settotal(t2)
     // }
     // totalArray.push(total)
@@ -87,24 +101,24 @@ export default function Home() {
     //   console.log(t.id)
     // })
     // console.log(Array.isArray(total))
-    if(selectedId.length >= 1){
+    if (selectedId.length >= 1) {
       setisChecked(true)
-    }else {
+    } else {
       setisChecked(false)
     }
-  }, [selectedId]);
+  }, [selectedId, isChecked]);
 
   function allSelect() {
     const items = []
-    setisChecked( prev => !prev)
+    setisChecked(prev => !prev)
     // if (isChecked) {
-    for (let i  = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       const id = files[i].id
       items.push(id)
     }
-      setselectedId(items)
+    setselectedId(items)
     // }
-    if(isChecked === true){
+    if (isChecked === true) {
       setselectedId([])
     }
   }
@@ -123,27 +137,27 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.container}>
-          <div style={{position:'sticky',top:'0' , zIndex:'2000'}}>
-              <section
-              // onAnimationEnd={(e)=>{}}
-                className={[styles.SelectNav, !visible ? styles.fadeOut : styles.fadeIn].join(" ")}>
-              <Selectbar setisChecked={setisChecked} total={total} length={selectedId.length} setselectedId={setselectedId} selectedId={selectedId} />
-              </section>
-            
-            
+          <div style={{ position: 'sticky', top: '0', zIndex: '2000' }}>
             <section
-              className={[styles.trashNav, visible ? styles.fadeOut : styles.fadeIn].join(" ")}>
-                  <Backbar />
+              // onAnimationEnd={(e)=>{}}
+              className={[styles.SelectNav, !visible ? styles.fadeOut : styles.fadeIn].join(" ")}>
+              <Selectbar playOff={playOff} setisChecked={setisChecked} total={total} length={selectedId.length} setselectedId={setselectedId} selectedId={selectedId} />
             </section>
 
-            <label className={styles.allSelect} >
+
+            <section
+              className={[styles.trashNav, visible ? styles.fadeOut : styles.fadeIn].join(" ")}>
+              <Backbar />
+            </section>
+
+            <label onMouseUp={() => !isChecked ? playOn() : playOff()} for="checkbox_id" className={styles.allSelect} >
               All Select
-              <input onMouseUp={isChecked ? playOn() : playOff()} onChange={allSelect} checked={isChecked} style={{ Accentcolor: 'green' }} type="checkbox" ></input>
-            </label> 
+              <input id="checkbox_id" onChange={allSelect} checked={isChecked} style={{ Accentcolor: 'green' }} type="checkbox" ></input>
+            </label>
           </div>
           <ul>
             {files.map((f) => (
-              <Card files={files} f={f} key={f.id} setselectedId={setselectedId} selectedId={selectedId} />
+              <Card playOn={playOn} playOff={playOff} setisChecked={setisChecked} files={files} f={f} key={f.id} setselectedId={setselectedId} selectedId={selectedId} />
             ))}
           </ul>
         </div>

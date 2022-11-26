@@ -154,11 +154,10 @@ sans-serif;
   
 }
 .deleteBtn{
-  width:116px;
-  height:69px;
+  height:77px;
   background-color: transparent;
   color:white;
-  padding:16px;
+  padding:0 22px;
   border-radius: 20px;
   border:none;
   cursor: pointer;
