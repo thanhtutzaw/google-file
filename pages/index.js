@@ -10,6 +10,8 @@ import { once } from 'events';
 // import audio from '/public/click.wav'
 import useSound from 'use-sound';
 import boopSfx from '/public/click.mp3'
+import checkSound from '/public/enable-sound.mp3'
+import uncheckSound from '/public/disable-sound.mp3'
 function Selectbar(props) {
   
   const [play] = useSound(boopSfx);
@@ -20,7 +22,7 @@ function Selectbar(props) {
         {
           /* <BiArrowBack className={styles.backBtn} /> */
         }
-        <IoMdClose onClick={(e)=>{props.setselectedId([])}} className={styles.backBtn} />
+        <IoMdClose onClick={(e)=>{props.setselectedId([]); props.setisChecked(false)}} className={styles.backBtn} />
         <div>
           <p>{props.length} selected</p>
           <p>{props.total} GB</p>
@@ -107,6 +109,11 @@ export default function Home() {
     }
   }
   const visible = selectedId.length >= 1
+
+  const [playOn] = useSound(checkSound,
+    { volume: 0.11 })
+  const [playOff] = useSound(uncheckSound,
+    { volume: 0.11 })
   return (
     <>
       <Head>
@@ -120,7 +127,7 @@ export default function Home() {
               <section
               // onAnimationEnd={(e)=>{}}
                 className={[styles.SelectNav, !visible ? styles.fadeOut : styles.fadeIn].join(" ")}>
-                <Selectbar total={total} length={selectedId.length} setselectedId={setselectedId} selectedId={selectedId} />
+              <Selectbar setisChecked={setisChecked} total={total} length={selectedId.length} setselectedId={setselectedId} selectedId={selectedId} />
               </section>
             
             
@@ -131,8 +138,8 @@ export default function Home() {
 
             <label className={styles.allSelect} >
               All Select
-              <input onChange={allSelect} checked={isChecked} style={{ Accentcolor: 'green' }} type="checkbox" ></input>
-            </label>
+              <input onMouseUp={isChecked ? playOn() : playOff()} onChange={allSelect} checked={isChecked} style={{ Accentcolor: 'green' }} type="checkbox" ></input>
+            </label> 
           </div>
           <ul>
             {files.map((f) => (
