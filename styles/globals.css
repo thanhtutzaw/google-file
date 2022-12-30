@@ -15,32 +15,10 @@ a {
 }
 
 ul {
-  padding      : 0;
-  margin       : 0;
-  /* height    : 142vh; */
-  /* width     :500px; */
-  /* overflow  : auto;
-  position     : absolute; */
-  /* height    : 100%; */
-  /* height    :300px; */
-  /* min-height: 120vh; */
-
-  /* inset:0; */
-  /* min-width:500px; */
-  /* min-width:483px; */
-  /* min-height:100%; */
+  padding: 0;
+  margin : 0;
 }
 
 * {
   box-sizing: border-box;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-} */

@@ -1,26 +1,19 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import styles from '../styles/Home.module.css'
-import { BiArrowBack } from 'react-icons/bi'
-import { IoMdClose } from 'react-icons/io'
-import Card from '../component/Card';
-import { setConstantValue } from 'typescript';
-import { once } from 'events';
-// import audio from '/public/click.wav'
+import { BiArrowBack } from 'react-icons/bi';
+import { IoMdClose } from 'react-icons/io';
 import useSound from 'use-sound';
-import boopSfx from '/public/click.mp3'
-import checkSound from '/public/enable-sound.mp3'
-import uncheckSound from '/public/disable-sound.mp3'
+import Card from '../component/Card';
+import styles from '../styles/Home.module.css';
+import boopSfx from '/public/click.mp3';
+import uncheckSound from '/public/disable-sound.mp3';
+import checkSound from '/public/enable-sound.mp3';
 function Selectbar(props) {
-
   const [play] = useSound(boopSfx);
   return (
     <>
-      {/* <audio controls src="/public/click.wav" /> */}
       <div className={styles.trashNav_count}>
         {
-          /* <BiArrowBack className={styles.backBtn} /> */
         }
         <IoMdClose onClick={(e) => { props.setselectedId([]); props.playOff() }} className={styles.backBtn} />
         <div>
@@ -35,7 +28,6 @@ function Selectbar(props) {
 function Backbar(props) {
   return (<div className={styles.trashNav_count}>
     {
-      /* <BiArrowBack className={styles.backBtn} /> */
     }
     <BiArrowBack className={styles.backBtn} />
     <div>
@@ -64,66 +56,35 @@ export default function Home() {
   const [selectedId, setselectedId] = useState([]);
   const [isChecked, setisChecked] = useState(false);
   const [total, settotal] = useState('');
-
   useEffect(() => {
-    //     if (isChecked) {
-    //       () => {
-    //         useSound(checkSound,
-    //           { volume: 0.11 })
-    // }
-    //     }
-    //     else {
-    //       () => {
-    //       useSound(uncheckSound,
-    //         { volume: 0.11 })
-    //       }
-    //     }
     console.log(isChecked)
-    // setisChecked(false)
-    // const total = files.filter(file => file.id == selectedId)
-    // console.log(selectedId)
     const totalArray = []
     let total
-    // for (let i = 0; i < selectedId.length; i++) {
-    // const id =selectedId.map(s => {
-    //   total = files.filter(file => file.id == s)
-    // })
     for (let i = 0; i < selectedId.length; i++) {
       total = files.filter(f => f.id === selectedId[i])
       totalArray.push(total[0])
     }
     const t2 = totalArray.map(t => parseInt(t.size)).reduce((prev, current) => prev + current, 0)
     settotal(t2)
-    // }
-    // totalArray.push(total)
-    // totalArray.push(total)
-    // total.map(t => {
-    //   console.log(t.id)
-    // })
-    // console.log(Array.isArray(total))
     if (selectedId.length >= 1) {
       setisChecked(true)
     } else {
       setisChecked(false)
     }
   }, [selectedId, isChecked]);
-
   function allSelect() {
     const items = []
     setisChecked(prev => !prev)
-    // if (isChecked) {
     for (let i = 0; i < files.length; i++) {
       const id = files[i].id
       items.push(id)
     }
     setselectedId(items)
-    // }
     if (isChecked === true) {
       setselectedId([])
     }
   }
   const visible = selectedId.length >= 1
-
   const [playOn] = useSound(checkSound,
     { volume: 0.11 })
   const [playOff] = useSound(uncheckSound,
@@ -139,18 +100,14 @@ export default function Home() {
         <div className={styles.container}>
           <div style={{ position: 'sticky', top: '0', zIndex: '2000' }}>
             <section
-              // onAnimationEnd={(e)=>{}}
               className={[styles.SelectNav, !visible ? styles.inactive : styles.active].join(" ")}>
               <Selectbar playOff={playOff} setisChecked={setisChecked} total={total} length={selectedId.length} setselectedId={setselectedId} selectedId={selectedId} />
             </section>
-
-
             <section
               className={[styles.trashNav, visible ? styles.inactive : styles.active].join(" ")}>
               <Backbar />
             </section>
-
-            <label onMouseUp={() => !isChecked ? playOn() : playOff()}  className={styles.allSelect} >
+            <label onMouseUp={() => !isChecked ? playOn() : playOff()} className={styles.allSelect} >
               {isChecked ? "Deselect All" : "All Select"}
               <input id="checkbox_id" onChange={allSelect} checked={isChecked} style={{ Accentcolor: 'green' }} type="checkbox" ></input>
             </label>
