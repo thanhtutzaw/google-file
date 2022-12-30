@@ -6,17 +6,17 @@
 }
 
 .main {
-  margin             : 0 auto;
-  /* background-color: rgb(37, 82, 230); */
-  background-color   : rgb(0, 0, 0);
-  /* max-width       : 483px; */
+  margin                : 0 auto;
+  /* background-color   : rgb(37, 82, 230); */
+  background-color      : rgb(0, 0, 0);
   /* max-width          : 483px; */
-  max-width          : 500px;
-  /* width           : 483px; */
-  width              : 500px;
-  /* min-height      :137vh; */
-  /* min-height      : 100vh; */
-  min-height         : 150vh;
+  /* max-width          : 483px; */
+  /* max-width          : 500px; */
+  width                 : 483px;
+  /* width              : 500px; */
+  /* min-height         :137vh; */
+  /* min-height         : 100vh; */
+  min-height            : 150vh;
 
   /* height: -webkit-fill-available; */
   /*padding: 4rem 0; */
@@ -220,7 +220,7 @@ top     :0;
 .card {
   /* margin: 1rem 0; */
   /* padding: 1rem; */
-  max-width: 500px;
+  max-width      : 483px;
   padding        : 0 16px;
   /* text-align  : left; */
   color          : inherit;
@@ -238,18 +238,22 @@ top     :0;
   /* transition   : all .1s ease-in-out; */
   /* max-width    : 300px; */
   /* max-width    :100px; */
-  list-style      : none;
   background-color: rgba(100, 100, 100, .5);
 }
-
+.cardContainer{
+  list-style : none;
+}
 .cardContainer::after {
-  content     : '';
-  position    : absolute;
-  width       : 100px;
-  /* min-width: 420px; */
-  min-width   : 400px;
+  content : '';
+  position: absolute;
+  width   : 100px;
+
+  /* min-width   : 400px;
   height      : 1px;
-  margin-left : 3.4rem;
+  margin-left : 3.4rem; */
+  min-width  : 441px;
+  height     : 1px;
+  margin-left: 24px;
 
   background-color: rgba(255, 255, 255, 0.247);
 
@@ -290,21 +294,23 @@ top     :0;
 }
 
 .fileInfo {
-    display       : flex;
-    flex-direction: column;
-    gap           : 3px;
+  display       : flex;
+  flex-direction: column;
+  gap           : 3px;
 
-    width   : 75%;
+  width: 75%;
 
   /* margin-left:-200px; */
 }
-.fileName{
-overflow        : hidden;
-white-space     : nowrap;
-text-overflow   : ellipsis;
+
+.fileName {
+  overflow     : hidden;
+  white-space  : nowrap;
+  text-overflow: ellipsis;
 }
+
 .fileInfo .fileSize {
-  font-size: .8rem;
+  font-size: 1rem;
   color    : #eeeeee;
 }
 
