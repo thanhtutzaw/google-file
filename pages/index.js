@@ -2,19 +2,18 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
-import useSound from 'use-sound';
 import Card from '../component/Card';
-import styles from '../styles/Home.module.css';
+import useSound from 'use-sound';
 import boopSfx from '/public/click.mp3';
 import uncheckSound from '/public/disable-sound.mp3';
 import checkSound from '/public/enable-sound.mp3';
+import styles from '../styles/Home.module.css';
+
 function Selectbar(props) {
   const [play] = useSound(boopSfx);
   return (
     <>
       <div className={styles.trashNav_count}>
-        {
-        }
         <IoMdClose onClick={(e) => { props.setselectedId([]); props.playOff() }} className={styles.backBtn} />
         <div>
           <p>{props.length} selected</p>
@@ -25,16 +24,16 @@ function Selectbar(props) {
     </>
   );
 }
-function Backbar(props) {
+function Backbar() {
   return (<div className={styles.trashNav_count}>
-    {
-    }
     <BiArrowBack className={styles.backBtn} />
     <div>
       <p>Trash</p>
     </div>
   </div>);
 }
+
+
 export default function Home() {
   const files = [
     {
@@ -59,36 +58,48 @@ export default function Home() {
   useEffect(() => {
     console.log(isChecked)
     const totalArray = []
-    let total
+    // let total
     for (let i = 0; i < selectedId.length; i++) {
-      total = files.filter(f => f.id === selectedId[i])
+      let total = files.filter(f => f.id === selectedId[i])
       totalArray.push(total[0])
     }
-    const t2 = totalArray.map(t => parseInt(t.size)).reduce((prev, current) => prev + current, 0)
-    settotal(t2)
+    const calculatedValue = totalArray.map(file => parseInt(file.size)).reduce((prev, current) => prev + current, 0)
+    settotal(calculatedValue)
+    // if (selectedId.length === 0) {
+    //   setisChecked(false)
+    // } else {
+    //   setisChecked(true)
+    // }
     if (selectedId.length >= 1) {
       setisChecked(true)
     } else {
       setisChecked(false)
     }
   }, [selectedId, isChecked]);
+
   function allSelect() {
-    const items = []
     setisChecked(prev => !prev)
-    for (let i = 0; i < files.length; i++) {
-      const id = files[i].id
-      items.push(id)
-    }
+
+    // const items = []
+    // for (let i = 0; i < files.length; i++) {
+    //   const id = files[i].id
+    //   items.push(id)
+    // }
+    const items = files.map(file => file.id)
     setselectedId(items)
-    if (isChecked === true) {
+
+    if (isChecked) {
       setselectedId([])
     }
   }
+
   const visible = selectedId.length >= 1
+
   const [playOn] = useSound(checkSound,
     { volume: 0.11 })
   const [playOff] = useSound(uncheckSound,
     { volume: 0.11 })
+
   return (
     <>
       <Head>
