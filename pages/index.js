@@ -140,18 +140,18 @@ export default function Home() {
           <div style={{ position: 'sticky', top: '0', zIndex: '2000' }}>
             <section
               // onAnimationEnd={(e)=>{}}
-              className={[styles.SelectNav, !visible ? styles.fadeOut : styles.fadeIn].join(" ")}>
+              className={[styles.SelectNav, !visible ? styles.inactive : styles.active].join(" ")}>
               <Selectbar playOff={playOff} setisChecked={setisChecked} total={total} length={selectedId.length} setselectedId={setselectedId} selectedId={selectedId} />
             </section>
 
 
             <section
-              className={[styles.trashNav, visible ? styles.fadeOut : styles.fadeIn].join(" ")}>
+              className={[styles.trashNav, visible ? styles.inactive : styles.active].join(" ")}>
               <Backbar />
             </section>
 
-            <label onMouseUp={() => !isChecked ? playOn() : playOff()} for="checkbox_id" className={styles.allSelect} >
-              All Select
+            <label onMouseUp={() => !isChecked ? playOn() : playOff()}  className={styles.allSelect} >
+              {isChecked ? "Deselect All" : "All Select"}
               <input id="checkbox_id" onChange={allSelect} checked={isChecked} style={{ Accentcolor: 'green' }} type="checkbox" ></input>
             </label>
           </div>
